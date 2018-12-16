@@ -1,5 +1,8 @@
 import pickle
 import pyuca
+import string
+
+translator = str.maketrans('', '', string.punctuation)
 
 
 def sort_set(set_to_sort):
@@ -30,10 +33,7 @@ def deserialize(filename):
         return pickle.load(input, encoding='utf-8')
 
 
-def read_beolingus(file):
-    lines = []
-    with open (file, 'rt') as file:
-        for line in file:
-            line = line.rstrip()
-            if not line.startswith('#'):
-                lines.append(line)
+def clean_up_str(s):
+    s = s.translate(translator)
+    s = s.strip()
+    return s
